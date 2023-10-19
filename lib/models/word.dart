@@ -1,23 +1,23 @@
 // create our Part of Speech model
 
-class PartOfSpeech {
+class Word {
   // defining how the PartOfSpeech will look like.
   // every Question will have An id , title and options
   final String id ;
   final String word ;
   final Map<String, bool> pos;
 
-  PartOfSpeech({
+  Word({
     required this.id,
     required this.word,
     required this.pos,
   });
 
 
-  //to print PartOfSpeech on console
+  //to print Word on console
   @override
   String toString(){
-    return 'PartOfSpeech(id: $id, title: $word, pos: $pos)';
+    return 'Word(id: $id, Word: $word, pos: $pos)';
   }
 }
 

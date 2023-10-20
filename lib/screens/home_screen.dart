@@ -31,85 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _words =getData();
     super.initState();
   }
-  // List<Word> _wordList = [
-      
-  //     Word(
-  //       id: "${1}",
-  //       word: "slowly",
-  //       pos: {'verb':false ,'adverb':true , 'adjective':false , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${2}",
-  //       word: "ride",
-  //       pos: {'verb':true ,'adverb':false , 'adjective':false , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${3}",
-  //       word: "bus",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':false , 'noun':true}
-  //     ),
-  //     Word(
-  //       id: "${4}",
-  //       word: "commute",
-  //       pos: {'verb':true ,'adverb':false , 'adjective':false , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${5}",
-  //       word: "emissions",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':false , 'noun':true}
-  //     ),
-  //     Word(
-  //       id: "${6}",
-  //       word: "walk",
-  //       pos: {'verb':true ,'adverb':false , 'adjective':false , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${7}",
-  //       word: "fast",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':true , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${8}",
-  //       word: "car",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':false , 'noun':true}
-  //     ),
-  //     Word(
-  //       id: "${9}",
-  //       word: "crowded",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':true , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${10}",
-  //       word: "arrival",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':false , 'noun':true}
-  //     ),
-  //     Word(
-  //       id: "${11}",
-  //       word: "emit",
-  //       pos: {'verb':true ,'adverb':false , 'adjective':false , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${12}",
-  //       word: "independent",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':true , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${13}",
-  //       word: "convenient",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':true , 'noun':false}
-  //     ),
-  //     Word(
-  //       id: "${14}",
-  //       word: "lane",
-  //       pos: {'verb':false ,'adverb':false , 'adjective':false , 'noun':true}
-  //     ),
-  //     Word(
-  //       id: "${15}",
-  //       word: "heavily",
-  //       pos: {'verb':false ,'adverb':true , 'adjective':false , 'noun':false}
-  //     ),
-  // ];
-  
+
   int index = 0;
 
   //adding the varaible that responebile for use score
@@ -189,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }else if (snapshot.hasData){
             var extractedData = snapshot.data as List<Word>;
+            extractedData.shuffle();
               return Scaffold(
               backgroundColor: backgroundColor,
               appBar: AppBar(
@@ -202,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Text(
-                      'Score: $score',
+                      'Score: ${score*2}',
                       style: const TextStyle(fontSize: 16,),
                     ),
                   )
@@ -238,7 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       QuestionWidget(
                         indexAction: index, //Currently at 0.
                         question: extractedData[index].word , //from 1st word in list.
-                        totalQuestions: extractedData.length,
+                        // totalQuestions: extractedData.length,
+                        totalQuestions: 5,
                       ),
           
                       const Divider(color: neutral,),
@@ -264,8 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               floatingActionButton: GestureDetector(
                 onTap: ()=>nextWord(extractedData.length),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: NextWordButton(),
                 ),
               ),
@@ -274,7 +198,22 @@ class _HomeScreenState extends State<HomeScreen> {
           }else {
             debugPrint('error \n ${snapshot.data}');
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: 
+                [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20,),
+                  Text('please wait while Words are loading..',
+                  style: TextStyle(
+                    // color: Theme.of(context).primaryColor,
+                    color: neutral,
+                    fontSize: 14.0,
+                    decoration: TextDecoration.none,
+
+                  ),)
+                ]
+                ),
             );
           }
         }

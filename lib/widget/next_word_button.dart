@@ -11,11 +11,12 @@ class NextWordButton extends StatelessWidget {
         color: neutral,
         borderRadius: BorderRadius.circular(10.0)
       ),
-      padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 20),
       
-      child: Text(
+      child: const Text(
         'Next Word',
         textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 18),
       ),
     );
   }

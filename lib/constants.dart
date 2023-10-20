@@ -7,5 +7,5 @@ const Color incorrect = Color(0xFFAB3232);
 
 const Color neutral = Color(0xFFE7E7E7);
 
-const Color backgroundColor = Color(0xFF1A3464);
+const Color backgroundColor = Color.fromARGB(255, 10, 137, 255);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
+import 'package:quiz_app/screens/history_score_screen.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key , required this.result, required this.wordListLength, required this.onPressed,}) : super (key: key);
@@ -25,12 +26,8 @@ class ResultScreen extends StatelessWidget {
                   color: neutral
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               CircleAvatar(
-                child: Text(
-                  "$result/$wordListLength",
-                  style: TextStyle(fontSize: 30.0),
-                ),
                 radius: 60.0,
                 backgroundColor: 
                   result == wordListLength/2 
@@ -38,6 +35,10 @@ class ResultScreen extends StatelessWidget {
                   : result < wordListLength/2 
                     ? incorrect 
                     : correct,
+                child: Text(
+                  "${result*2}/${wordListLength*2}",
+                  style: const TextStyle(fontSize: 30.0),
+                ),
               ),
 
               const SizedBox(height: 20.0,),
@@ -47,13 +48,23 @@ class ResultScreen extends StatelessWidget {
                   : result < wordListLength/2 
                     ? 'Try Again ?' 
                     : 'Great!',
-                  style: TextStyle(color: neutral),
+                  style: const TextStyle(color: neutral),
               ),
 
               const SizedBox(height: 20.0,),
               GestureDetector(
                 onTap: onPressed,
-                child: const Text('Start Over',style:  TextStyle(fontSize: 20, color: Colors.blue , letterSpacing: 1.0),),
+                child: const Text('Start Over',style:  TextStyle(fontSize: 20, color: Colors.white , letterSpacing: 1.0,fontWeight: FontWeight.bold),),
+              ),
+
+              const SizedBox(height: 15.0,),
+
+              GestureDetector(
+                onTap: (){
+                  //navigate to page contain score
+                  Navigator.push(context, MaterialPageRoute(builder: (builder)=>HistoryScoresScreen(score: result,)));
+                },
+                child: const Text('History Scores',style:  TextStyle(fontSize: 20, color: Colors.white , letterSpacing: 1.0,fontWeight: FontWeight.bold),),
               ),
          
           ],
